@@ -72,6 +72,7 @@ migrate -path ./migrations \
         down
 ```
 
+```bash
 # in my case using root db (local only / not recommended for production)
 
 sudo migrate -path ./migrations \
