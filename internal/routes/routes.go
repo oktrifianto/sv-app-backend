@@ -24,6 +24,7 @@ func Setup(app *fiber.App, db *gorm.DB) {
 
 	// List with pagination: /article/:limit/:offset
 	// This must be registered before /:id so Fiber doesn't swallow "10" as an id.
+	// another things, if page 2 it will be /article/10/10 (10 is the limit and 10 is the offset)
 	article.Get("/:limit/:offset", h.ListArticles)
 
 	article.Get("/:id", h.GetArticle)
