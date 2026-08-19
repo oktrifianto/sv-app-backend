@@ -58,7 +58,8 @@ func (h *ArticleHandler) ListArticles(c *fiber.Ctx) error {
 
 	var posts []models.Post
 
-	query := h.DB.Limit(limit).Offset(offset)
+	// Keep list pagination stable by sorting newest updates first, then newest ids.
+	query := h.DB.Order("updated_date DESC").Order("id DESC").Limit(limit).Offset(offset)
 
 	// Optional status filter — makes the Dashboard tabs and Preview pagination work correctly.
 	if status := c.Query("status"); status != "" {
