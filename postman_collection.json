@@ -1,0 +1,119 @@
+{
+  "info": {
+    "name": "Post Article API",
+    "_postman_id": "post-article-api-v1",
+    "description": "REST API for blog article management (Golang + Fiber)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create Article",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "{{base_url}}/article/", "host": ["{{base_url}}"], "path": ["article", ""] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"A title that is long enough to pass validation\",\n  \"content\": \"This content must be at least two hundred characters long. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.\",\n  \"category\": \"Technology\",\n  \"status\": \"publish\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "List Articles (all)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{base_url}}/article/10/0", "host": ["{{base_url}}"], "path": ["article", "10", "0"] }
+      },
+      "response": []
+    },
+    {
+      "name": "List Articles (published)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/article/10/0?status=publish",
+          "host": ["{{base_url}}"],
+          "path": ["article", "10", "0"],
+          "query": [{ "key": "status", "value": "publish" }]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "List Articles (drafts)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/article/10/0?status=draft",
+          "host": ["{{base_url}}"],
+          "path": ["article", "10", "0"],
+          "query": [{ "key": "status", "value": "draft" }]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "List Articles (trashed)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/article/10/0?status=trash",
+          "host": ["{{base_url}}"],
+          "path": ["article", "10", "0"],
+          "query": [{ "key": "status", "value": "trash" }]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Article by ID",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "{{base_url}}/article/1", "host": ["{{base_url}}"], "path": ["article", "1"] }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Article",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "{{base_url}}/article/1", "host": ["{{base_url}}"], "path": ["article", "1"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Updated title that still meets the minimum length\",\n  \"content\": \"Updated content. This must still be at least two hundred characters long. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore. Ut enim ad minim veniam, quis nostrud.\",\n  \"category\": \"Science\",\n  \"status\": \"draft\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Trash Article (status update)",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "{{base_url}}/article/1", "host": ["{{base_url}}"], "path": ["article", "1"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"A title that is long enough to pass validation\",\n  \"content\": \"This content must be at least two hundred characters long. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.\",\n  \"category\": \"Technology\",\n  \"status\": \"trash\"\n}"
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Article",
+      "request": {
+        "method": "DELETE",
+        "url": { "raw": "{{base_url}}/article/1", "host": ["{{base_url}}"], "path": ["article", "1"] }
+      },
+      "response": []
+    }
+  ]
+}
