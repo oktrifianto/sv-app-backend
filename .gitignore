@@ -1,1 +1,6 @@
 .env
+
+# Output directories and local builds
+/[a-zA-Z0-9_-]/main
+/dist/
+/bin/
