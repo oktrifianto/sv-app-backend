@@ -1,4 +1,4 @@
-# Post Article — Backend (Go + Fiber)
+# Post Article -> Backend (Go + Fiber)
 
 REST API for blog article management. Built with Go 1.26, Fiber, GORM, and MySQL.
 
@@ -21,7 +21,7 @@ brew install golang-migrate
 # Or download a binary from https://github.com/golang-migrate/migrate/releases
 # and place it on your PATH.
 
-# for wsl
+# for wsl2
 curl -L https://github.com/golang-migrate/migrate/releases/download/v4.18.1/migrate.linux-amd64.tar.gz | tar xvz
 sudo mv migrate /usr/local/bin/migrate
 ```
@@ -33,7 +33,6 @@ sudo mv migrate /usr/local/bin/migrate
 ### 1. Clone and install dependencies
 
 ```bash
-cd backend
 go mod download
 ```
 
@@ -70,6 +69,17 @@ migrate -path ./migrations \
 # Rollback (down)
 migrate -path ./migrations \
         -database "mysql://<db_user>:<db_password>@tcp(127.0.0.1:3306)/sv_article" \
+        down
+```
+
+# in my case using root db (local only / not recommended for production)
+
+sudo migrate -path ./migrations \
+        -database "mysql://root@tcp(127.0.0.1:3306)/sv_article" \
+        up
+
+sudo migrate -path ./migrations \
+        -database "mysql://root@tcp(127.0.0.1:3306)/sv_article" \
         down
 ```
 
