@@ -51,12 +51,33 @@ cp .env.example .env
 | `DB_PORT` | `3306` | MySQL port |
 | `DB_USER` | `<db_user>` | MySQL user |
 | `DB_PASSWORD` | `<db_password>` | MySQL password |
-| `DB_NAME` | `sv_article` | Database name (created by migration) |
+| `DB_NAME` | `sv_article` | Database name |
 | `SERVER_PORT` | `8080` | Port the API listens on |
 
-### 3. Run migrations
+### 3. Database setup
 
-The migration creates the `sv_article` database and the `posts` table.
+Both approaches create the `sv_article` database and the `posts` table. Use **one** of them.
+
+#### Option A — Manual (recommended for local setup)
+
+Run the SQL script directly. This creates the database if it does not exist yet.
+
+```bash
+mysql -u <db_user> -p < db/schema.sql
+```
+
+Replace `<db_user>` with the value from your `.env` (`DB_USER`). You will be prompted for the password (`DB_PASSWORD`).
+
+The script is at [`db/schema.sql`](db/schema.sql). It creates:
+
+| Object | Details |
+|---|---|
+| Database | `sv_article` |
+| Table | `posts` |
+| Columns | `id`, `title`, `content`, `category`, `created_date`, `updated_date`, `status` |
+| Status values | `publish`, `draft`, `trash` (enforced in application layer) |
+
+#### Option B — golang-migrate
 
 Replace `<db_user>` and `<db_password>` with the values from your `.env` (`DB_USER`, `DB_PASSWORD`).
 
